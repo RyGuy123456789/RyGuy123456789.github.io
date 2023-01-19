@@ -1,0 +1,86 @@
+<html>
+<head>
+<title> UFO Defence </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+<script>
+function start(){
+sjs.open("target",500,400); 
+sjs.loadImageArray(localStorage.getItem('level1'));
+//player
+var player = new sjs.Image("Images/player.png")
+player.type = "player";
+player.setSize(50,50);
+player.bottom();
+player.centerH();
+//enemy ship
+var enemy = new sjs.Image("Images/mothership.png")
+enemy.type = "enemy";
+enemy.setSize(50,50);
+enemy.centerH();
+//movement
+sjs.keyDown(LEFT_KEY, function(){
+player.pushLeft();
+enemy.pushLeft();
+});
+sjs.keyDown(RIGHT_KEY, function(){
+player.pushRight();
+enemy.pushRight();
+});
+//shooting
+var canshoot = true
+sjs.keyDown(SPACE_KEY, function(){
+	if(canshoot == true){
+		canshoot = false
+var bullet = new sjs.Image("Images/bullets.png")
+bullet.type = "bullet";
+bullet.setSize(50,50);
+bullet.moveTo(player.getX(),player.getY())
+bullet.pushUp(20);
+var laser = new sjs.Image("Images/laser.png")
+laser.type = "laser";
+laser.setSize(50,50);
+laser.moveTo(player.getX(),0);
+laser.pushDown(15);
+setTimeout(function(){
+canshoot = true;
+},1000);
+};
+});
+sjs.onHit("bullet","top_screen", function(x,y){
+	x.destroy();
+});
+sjs.onHit("laser","bottom_screen", function(x,y){
+x.destroy();
+});
+sjs.onHit("bullet","enemy", function(x,y){
+	x.destroy();
+	y.destroy();
+	window.location = "win.html"
+});
+sjs.onHit("laser","player", function(x,y){
+	x.destroy();
+	y.destroy();
+	window.location = "lose.html"
+});
+sjs.onHit("laser","ufo_green", function(x,y){
+	x.destroy();
+	y.destroy();
+	});
+sjs.onHit(["laser","bullet"],"ufo_yellow", function(x,y){
+	x.destroy();
+	y.destroy();
+	});
+sjs.onHit("bullet","ufo_red", function(x,y){
+	x.destroy();
+	y.destroy();
+	});
+} //end start
+
+</script>
+</head>
+<body onload="start()">
+<h1> UFO Defence </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>

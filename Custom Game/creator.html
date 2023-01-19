@@ -1,0 +1,57 @@
+<html>
+<head>
+<title> Create your level </title>
+<script src="https://simplycodingcourses.com/files/simply.js"></script>
+<script>
+var level1 = [];
+function start(){
+sjs.open("target",500,400);
+var playBtn = new sjs.Button("Play Level", function(){
+localStorage.setItem('level1', sjs.saveImageArray(level1));
+window.location = "ufo game.html"
+});
+
+} //end start
+function ufo_green(){
+	var ufo_green = new sjs.Image("Images/ufo_green.png");
+	ufo_green.type = "ufo_green";
+	ufo_green.setSize(50,50);
+	ufo_green.center().offset(-sjs.gx,10);
+	ufo_green.onMouseDown(function(){
+		ufo_green.draggable();
+		ufo_green.follow(sjs.mouse);
+		level1.push(ufo_green)
+	})
+}
+function ufo_yellow(){
+    var ufo_yellow = new sjs.Image("Images/ufo_yellow.png");
+	ufo_yellow.type = "ufo_yellow";
+	ufo_yellow.setSize(50,50);
+	ufo_yellow.center().offset(-sjs.gx,10);
+	ufo_yellow.onMouseDown(function(){
+		ufo_yellow.draggable();
+		ufo_yellow.follow(sjs.mouse);
+		level1.push(ufo_yellow)
+	})
+}
+function ufo_red(){
+	var ufo_red = new sjs.Image("Images/ufo_red.png");
+	ufo_red.type = "ufo_red";
+    ufo_red.setHeight	(50);
+	ufo_red.center().offset(-sjs.gx,10);
+	ufo_red.onMouseDown(function(){
+		ufo_red.draggable();
+		ufo_red.follow(sjs.mouse);
+		level1.push(ufo_red)
+	})
+}
+</script>
+</head>
+<body onload="start()">
+<h1> Create Your Level </h1>
+<input type="image" src="Images/ufo_green.png" onclick="ufo_green()">
+<input type="image" src="Images/ufo_yellow.png" onclick="ufo_yellow()">
+<input type="image" src="Images/ufo_red.png" onclick="ufo_red()">
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>

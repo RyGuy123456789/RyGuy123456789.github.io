@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Menu </title>
+<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+<script>
+function start(){
+sjs.open();
+var menu_text = new sjs.Text("UFO Defence", 28, "blue");
+menu_text.centerH().offset(0,30)
+var platform_button = new sjs.Button("Design Level, then Play!", function(){
+	window.location = "platform.html";
+});
+var howtoplay = new sjs.Text("Use arrow keys to move, space to shoot. Red UFOs are enemies, green are friendly, yellow are nuetral. Dodge attacks from the enemy at the top of the screen, then shoot them to win!", 20,"green") 
+howtoplay.center()
+var me = new sjs.Text("Created by Ryan Forte", 20, "red")
+me.bottom().centerH()
+}
+</script>
+</head>
+<body onload="start()">
+<h1> Main Menu </h1>
+
+<div id="target" style="margin:auto;background:grey;"></div>
+</body>
+</html>
